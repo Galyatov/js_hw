@@ -1,16 +1,16 @@
 'use strict';
 
-let value1 = parseFloat(prompt('Введіть перше число:'));
-let value2 = parseFloat(prompt('Введіть друге число:'));
+const operand1 = parseFloat(prompt('Введіть перше число:'));
+const operand2 = parseFloat(prompt('Введіть друге число:'));
 
-let sumResult = value1 + value2;
-console.log(`Результат: ${value1} + ${value2} = ${sumResult}`);
+const sumResult = operand1 + operand2;
+console.log(`Результат: ${operand1} + ${operand2} = ${sumResult}`);
 
-let subResult = value1 - value2;
-console.log(`Результат: ${value1} - ${value2} = ${subResult}`);
+const subResult = operand1 - operand2;
+console.log(`Результат: ${operand1} - ${operand2} = ${subResult}`);
 
-let mulResult = value1 * value2;
-console.log(`Результат: ${value1} * ${value2} = ${mulResult}`);
+const mulResult = operand1 * operand2;
+console.log(`Результат: ${operand1} * ${operand2} = ${mulResult}`);
 
-let divResult = value1 / value2;
-console.log(`Результат: ${value1} / ${value2} = ${divResult}`);
+const divResult = operand1 / operand2;
+console.log(`Результат: ${operand1} / ${operand2} = ${divResult}`);
