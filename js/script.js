@@ -11,6 +11,6 @@ const currentVisitorName = 'John';
 console.log('Oasis', planetName);
 console.log ('John', currentVisitorName);
 
-let variable = "10" + 10;
+const variable = "10" + 10;
 console.log(variable);
 console.log(typeof variable);
