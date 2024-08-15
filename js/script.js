@@ -1,10 +1,12 @@
 'use strict'
 const age = prompt('Скільки вам років?');
-const conditionage=age!== null && age.trim().length && !isNaN(+age) ;
-const city=prompt('Де ви проживаєте?');
-const conditioncity=city!== null && city.trim().length && !isNaN(+city);
-const sport=prompt('Який ваш улюблений вид спорту?');
-const conditionsport=sport!== null && sport.trim().length && !isNaN(+sport);
+const conditionage = age !== null && age.trim().length && !isNaN(+age);
+
+const city = prompt('Де ви проживаєте?');
+const conditioncity = city !== null && city.trim().length;
+
+const sport = prompt('Який ваш улюблений вид спорту?');
+const conditionsport = sport !== null && sport.trim().length;
 
 if (conditionage){
     alert(age);
