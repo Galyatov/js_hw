@@ -1,0 +1,26 @@
+{
+    "name": "js_hw",
+    "version": "1.0.0",
+    "description": "Напишіть скрипт, який переводить години в секунди і має робити насутпне:",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "prettier": "npx prettier . --write"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Galyatov/js_hw.git"
+    },
+    "author": "Pasha Galyatov",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Galyatov/js_hw/issues"
+    },
+    "homepage": "https://github.com/Galyatov/js_hw#readme",
+    "dependencies": {
+        "lodash": "^4.17.21"
+    },
+    "devDependencies": {
+        "prettier": "3.3.3"
+    }
+}
