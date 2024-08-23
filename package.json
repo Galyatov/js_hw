@@ -18,9 +18,13 @@
     },
     "homepage": "https://github.com/Galyatov/js_hw#readme",
     "dependencies": {
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "react": "^18.3.1",
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
+        "eslint": "^8.2.0",
+        "eslint-config-airbnb": "^19.0.4",
         "prettier": "3.3.3"
     }
 }
