@@ -14,5 +14,4 @@ const flat = (arr, result = []) => {
     return result;
 }
 
-console.log(flat(complexArray)
-);
+console.log(flat(complexArray));
