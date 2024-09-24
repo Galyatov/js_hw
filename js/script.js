@@ -24,7 +24,6 @@ const insertWordInto = (initialString) => {
         return result.join(' ');
     };
 };
-
 const insert = insertWordInto('hello world');
 console.log(insert('Odesa'));
 console.log(insert('Odesa'));
