@@ -38,5 +38,4 @@ const generateTable = () => {
 
     return table;
 };
-
 appendHTMLElement(parentElement, generateTable());
