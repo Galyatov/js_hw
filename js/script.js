@@ -1,7 +1,26 @@
 'use strict';
 
-const images = ['1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '6.jpg', '7.jpg', '8.jpg', '9.jpg'];
-const randomIndex = Math.floor(Math.random() * images.length);
-const randomImage = images[randomIndex];
-const imgElement = document.getElementById('randomImage');
-imgElement.src = `images/${randomImage}`;
+const IMG_FOLDER = './images';
+const IMG_EXT = '.jpg'
+const appentHTMLelement = (parentElement = null, elementToAppend = null) => {
+    if (!parentElement || !elementToAppend) return;
+    parentElement.append(elementToAppend);
+};
+
+const getRandomNumber = () => {
+    const num = Math.floor(Math.random() *9);
+    if (num === 0) return 1;
+    return num;
+};
+
+const generateImg = (imgName) => {
+    const img = document.createElement('img');
+    img.src = `${IMG_FOLDER}/${imgName + IMG_EXT}`;
+    img.alt = `${IMG_FOLDER}/${imgName + IMG_EXT}`;
+    img.title = `${IMG_FOLDER}/${imgName + IMG_EXT}`;
+    return img;
+};
+
+
+const imgToAppend = generateImg(getRandomNumber());
+appentHTMLelement(document.body, imgToAppend);
