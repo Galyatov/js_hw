@@ -20,7 +20,6 @@ const appendHTMLElement = (parentElement, elementToAppend) => {
     parentElement.append(elementToAppend);
 };
 
-
 const randomImgName = getRandomNumber(1, 9);
 const imgElement = generateImgElement(randomImgName);
 appendHTMLElement(document.body, imgElement);
