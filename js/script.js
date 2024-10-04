@@ -1,6 +1,5 @@
 'use strict';
 
-
 const textField = document.getElementById('textField');
 const sideDiv = document.getElementById('sideDiv');
 
