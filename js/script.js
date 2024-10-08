@@ -16,10 +16,10 @@ console.log(attributesValues);
 console.log(attributesNames);
 
 const lastLi = document.querySelector('ul li:last-child');
-lastLi.textContent = 'Привіт, мене звати Паша';
+lastLi.textContent = 'Hi, my name is Pasha.';
 
 const firstLi = document.querySelector('ul li:first-child');
-const yourName = 'Паша';
+const yourName = 'Pasha';
 firstLi.setAttribute('data-my-name', yourName);
 
 ulElement.removeAttribute('data-dog-tail');
