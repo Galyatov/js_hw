@@ -4,6 +4,7 @@
     const form = document.querySelector('[data-todo-form]');
     const todoItemsContainer = document.querySelector('#todoItems');
 
+
     const createTodoItem = ({title, description}) => {
         const wrapper = document.createElement('div');
         wrapper.className = 'col-4';
