@@ -1,68 +1,70 @@
 'use strict';
 
-(function() {
-    const form = document.querySelector('[data-todo-form]');
-    const todoItemsContainer = document.querySelector('#todoItems');
+(function () {
+    const todoFormElement = document.querySelector('[data-todo-form]');
+    const todoListElement = document.querySelector('#todoItems');
 
-
-    const createTodoItem = ({title, description}) => {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'col-4';
-        wrapper.innerHTML = `
+    const createTodoCard = ({title, description}) => {
+        const card = document.createElement('div');
+        card.className = 'col-4';
+        card.innerHTML = `
             <div class="taskWrapper">
                 <div class="taskHeading">${title}</div>
                 <div class="taskDescription">${description}</div>
             </div>`;
-        return wrapper;
+        return card;
     }
 
-    const submitHandler = (event) => {
-        event.preventDefault();
+    const configureFormHandlers = (formElement) => {
+        let isFormInvalid = true;
+        const formFieldValidity = {};
 
-        const inputs = event.target.querySelectorAll('input, textarea');
-        const data = Array.from(inputs).reduce((acc, {name, value}) => {
-            acc[name] = value;
-            return acc;
-        }, {});
+        const initializeFormFieldValidity = () => {
+            formElement.querySelectorAll('input, textarea').forEach(({name}) => {
+                formFieldValidity[name] = false;
+            })
+        }
+        initializeFormFieldValidity();
+        console.log(formFieldValidity);
 
-        const isValid = validateData(data);
-
-        if (isValid) {
-            const todoItemElement = createTodoItem(data);
-            todoItemsContainer.prepend(todoItemElement);
+        const handleSubmit = (event) => {
+            event.preventDefault();
+            if (isFormInvalid) return;
+            const inputs = event.target.querySelectorAll('input, textarea');
+            const formData = Array.from(inputs).reduce((acc, {name, value}) => {
+                acc[name] = value;
+                return acc;
+            }, {});
+            const todoCardElement = createTodoCard(formData);
+            todoListElement.prepend(todoCardElement);
             event.target.reset();
-        } else {
-            alert('Please fill out all fields before submitting.');
         }
-    }
 
-    const inputHandler = () => {
-        const formSubmitBtn = form.querySelector('button[type=submit]');
-        const inputs = form.querySelectorAll('input, textarea');
-        let isFormValid = true;
+        const handleInput = ({target}) => {
+            const submitButtonElement = formElement.querySelector('button[type=submit]');
 
-        inputs.forEach(input => {
-            if (input.value.trim() === '') {
-                isFormValid = false;
+            if (target.value.trim().length) {
+                if (!formFieldValidity[target.name]) formFieldValidity[target.name] = true;
+            } else {
+                if (formFieldValidity[target.name]) formFieldValidity[target.name] = false;
             }
-        });
 
-        if (isFormValid) {
-            formSubmitBtn.removeAttribute('disabled');
-        } else {
-            formSubmitBtn.setAttribute('disabled', '');
-        }
-    }
+            isFormInvalid = !Object.values(formFieldValidity).every((field) => field);
 
-    const validateData = (data) => {
-        for (let key in data) {
-            if (data[key].trim() === '') {
-                return false;
+            if (!isFormInvalid) {
+                submitButtonElement.removeAttribute('disabled');
+            } else {
+                submitButtonElement.setAttribute('disabled', '');
             }
         }
-        return true;
+
+        return {
+            handleInput,
+            handleSubmit
+        }
     }
 
-    form.addEventListener('submit', submitHandler);
-    form.addEventListener('input', inputHandler);
+    const {handleSubmit, handleInput} = configureFormHandlers(todoFormElement);
+    todoFormElement.addEventListener('submit', handleSubmit);
+    todoFormElement.addEventListener('input', handleInput);
 })();
