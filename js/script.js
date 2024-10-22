@@ -1,1 +1,214 @@
 'use strict';
+let board = [
+    ['', '', ''],
+    ['', '', ''],
+    ['', '', ''],
+]
+const playerMark = 'X'
+const computerMark = 'O'
+let gameOver = false
+
+const statusElement = document.getElementById('status')
+const boardElement = document.getElementById('board')
+const restartButton = document.getElementById('restart')
+
+restartButton.addEventListener('click', resetGame)
+function initBoard() {
+    boardElement.innerHTML = ''
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            const cell = document.createElement('div')
+            cell.classList.add('cell')
+            cell.dataset.row = i
+            cell.dataset.col = j
+            cell.addEventListener('click', playerMove)
+            boardElement.appendChild(cell)
+        }
+    }
+}
+
+function playerMove(event) {
+    if (gameOver) return
+
+    const row = event.target.dataset.row
+    const col = event.target.dataset.col
+
+    if (board[row][col] === '') {
+        board[row][col] = playerMark
+        event.target.textContent = playerMark
+        event.target.classList.add('disabled')
+
+        if (checkWin(playerMark)) {
+            statusElement.textContent = 'Гравець переміг!'
+            gameOver = true
+        } else if (checkDraw()) {
+            statusElement.textContent = 'Нічия!'
+            gameOver = true
+        } else {
+            computerMove()
+        }
+    }
+}
+function computerMove() {
+    const bestMove = getBestMove()
+    if (bestMove) {
+        const { row, col } = bestMove
+        board[row][col] = computerMark
+        const cell = document.querySelector(
+            `.cell[data-row="${row}"][data-col="${col}"]`
+        )
+        cell.textContent = computerMark
+        cell.classList.add('disabled')
+
+        if (checkWin(computerMark)) {
+            statusElement.textContent = "Комп'ютер переміг!"
+            gameOver = true
+        } else if (checkDraw()) {
+            statusElement.textContent = 'Нічия!'
+            gameOver = true
+        } else {
+            statusElement.textContent = 'Ваш хід'
+        }
+    }
+}
+function checkWin(mark) {
+    const winLines = [
+        [
+            [0, 0],
+            [0, 1],
+            [0, 2],
+        ],
+        [
+            [1, 0],
+            [1, 1],
+            [1, 2],
+        ],
+        [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+        ],
+        [
+            [0, 0],
+            [1, 0],
+            [2, 0],
+        ],
+        [
+            [0, 1],
+            [1, 1],
+            [2, 1],
+        ],
+        [
+            [0, 2],
+            [1, 2],
+            [2, 2],
+        ],
+        [
+            [0, 0],
+            [1, 1],
+            [2, 2],
+        ],
+        [
+            [0, 2],
+            [1, 1],
+            [2, 0],
+        ],
+    ]
+
+    return winLines.some((line) => {
+        return line.every(([row, col]) => board[row][col] === mark)
+    })
+}
+
+function checkDraw() {
+    return board.flat().every((cell) => cell !== '')
+}
+
+function countWinningLines(mark) {
+    const winLines = [
+        [
+            [0, 0],
+            [0, 1],
+            [0, 2],
+        ],
+        [
+            [1, 0],
+            [1, 1],
+            [1, 2],
+        ],
+        [
+            [2, 0],
+            [2, 1],
+            [2, 2],
+        ],
+        [
+            [0, 0],
+            [1, 0],
+            [2, 0],
+        ],
+        [
+            [0, 1],
+            [1, 1],
+            [2, 1],
+        ],
+        [
+            [0, 2],
+            [1, 2],
+            [2, 2],
+        ],
+        [
+            [0, 0],
+            [1, 1],
+            [2, 2],
+        ],
+        [
+            [0, 2],
+            [1, 1],
+            [2, 0],
+        ],
+    ]
+
+    let count = 0
+    winLines.forEach((line) => {
+        const marks = line.map(([row, col]) => board[row][col])
+        if (
+            marks.filter((cell) => cell === mark).length === 0 &&
+            marks.filter((cell) => cell === '').length > 0
+        ) {
+            count++
+        }
+    })
+    return count
+}
+
+function getBestMove() {
+    let bestMove = null
+    let maxLines = -1
+
+    for (let i = 0; i < 3; i++) {
+        for (let j = 0; j < 3; j++) {
+            if (board[i][j] === '') {
+                board[i][j] = computerMark
+                const winningLines = countWinningLines(computerMark)
+                board[i][j] = ''
+
+                if (winningLines > maxLines) {
+                    maxLines = winningLines
+                    bestMove = { row: i, col: j }
+                }
+            }
+        }
+    }
+    return bestMove
+}
+function resetGame() {
+    board = [
+        ['', '', ''],
+        ['', '', ''],
+        ['', '', ''],
+    ]
+    gameOver = false
+    statusElement.textContent = 'Ваш хід'
+    initBoard()
+}
+initBoard()
