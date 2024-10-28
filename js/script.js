@@ -32,5 +32,5 @@ console.log(user.name);
 user.age = 21;
 console.log(user.age);
 
-user.age = 130;
+user.age = 777;
 
