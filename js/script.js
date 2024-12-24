@@ -18,7 +18,7 @@ $(document).ready(function() {
             $('#wind-speed').text('Швидкість вітру: ' + data.wind.speed + ' м/с');
             $('#wind-direction').text('Напрям вітру: ' + data.wind.deg + '°');
 
-            var iconUrl = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
+            let iconUrl = 'https://openweathermap.org/img/w/' + data.weather[0].icon + '.png';
             $('#weather-icon').attr('src', iconUrl);
         },
         error: function() {
