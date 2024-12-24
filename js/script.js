@@ -1,9 +1,9 @@
 'use strict';
 
 $(document).ready(function() {
-    var city = 'LVIV';
-    var apiKey = '5d066958a60d315387d9492393935c19';
-    var url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${apiKey}`;
+    let city = 'LVIV';
+    let apiKey = '5d066958a60d315387d9492393935c19';
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&APPID=${apiKey}`;
 
     $.ajax({
         url: url,
